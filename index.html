@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photon PUN & Voice Patcher</title>
+    <style>
+        body {
+            background-color: #1f1f1f;
+            color: #FFFFFF;
+            font-family: 'Arial';
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            text-align: center;
+        }
+
+        .content {
+            padding: 8px 8px 8px 8px;
+            border:2px solid white;
+        }
+
+        a {color: cadetblue}
+    </style>
+
+    <script src="./patcher.js"></script>
+    <script>
+        function saveBlob(blob, fileName) 
+        {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function orange_wire()
+        {
+            const status = document.getElementById('status')
+
+            const different_server = document.getElementById("og")
+
+            const old_pun = different_server ? document.getElementById('pun-old').value : "9372aa8d-d3f4-44a0-986d-419e145a2b83"
+            const old_voice = different_server ? document.getElementById('voice-old').value : "e93ae440-f238-4b6c-848f-1df89faf14f5"
+            const new_pun = document.getElementById('pun').value
+            const new_voice = document.getElementById('voice').value
+
+            const file = document.getElementById('upload').files[0]
+            if (!file)
+            {
+                status.innerText = "No file provided."
+                status.style = "color: red;"
+                return;
+            }
+            const buffer = await file.arrayBuffer();
+
+            try
+            {
+                const patchedFile = await patch_photon(old_pun, old_voice, new_pun, new_voice, buffer)
+
+                const blob = new Blob([patchedFile], { type: file.type });
+                saveBlob(blob, `custom-photon-${file.name}`);
+                status.innerText = "Patched!"
+                status.style = "color: green;"
+            }
+            catch(e)
+            {
+                status.innerText = `Something went wrong when patching your file.\n${e.message}`
+                status.style = "color: red;"
+                return;
+            }
+        }
+
+        function toggle_rep()
+        {
+            const deez = document.getElementById("og")
+
+            deez.hidden = !deez.hidden
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <h2>Photon PUN & Voice Patcher</h2>
+        <span id="status">Ready.</span>
+        <hr>
+        <label>Unpatched resources.assets</label>
+        <input id="upload" type="file" accept=".assets" name="Upload resources.assets">
+        <br>
+        <label>New Photon PUN server</label>
+        <input id="pun" type="text" name="Photon PUN" maxlength="36" size="36">
+        <br>
+        <label>New Photon Voice server</label>
+        <input id="voice" type="text" name="Photon Voice" maxlength="36" size="36">
+        <br>
+        <button id="patchbutton" onclick="orange_wire()">Cut the orange wire (Patch)</button>
+        <hr>
+        <p>Patching happens on device. Files do not leave your browser.<br>
+        <a href="https://google.com">This tool is open source!</a></p>
+    </div>
+    <br>
+    <p>You should only need to use this if the game you are patching <b>isn't</b> Rec Room.</p>
+    <button onclick="toggle_rep()">Set original servers</button>
+    <br>
+    <div id = "og" class="content" hidden>
+        <p><b>!! IDs inputted in here will be used over the default ones !!</b><br>Hide this dialog using the button if you don't need it.</p>
+        <label>Original Photon PUN server</label>
+        <input id="pun-old" type="text" name="Photon PUN" maxlength="36" size="36" value="9372aa8d-d3f4-44a0-986d-419e145a2b83">
+        <br>
+        <label>Original Photon Voice server</label>
+        <input id="voice-old" type="text" name="Photon Voice" maxlength="36" size="36" value="e93ae440-f238-4b6c-848f-1df89faf14f5">
+    </div>
+</body>
+</html>
