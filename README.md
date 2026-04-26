@@ -2,7 +2,7 @@
 <img src="https://avatars.githubusercontent.com/u/274413706" width="128" height="128">
 <h1>Coach's Time Machine - Photon Patcher [util]</h1>
 
-[Please check this Readme for information about CTM, including a compatibility list.](https://github.com/CoachsTimeMachine/.github/blob/main/README.md)
+[Please check this Readme for information about CTM, including a compatibility list.](https://github.com/CoachsTimeMachine)
 
 [Open the utility here.](https://coachstimemachine.github.io/util.photon-patcher/)
 </div>
