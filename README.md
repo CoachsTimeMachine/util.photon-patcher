@@ -4,9 +4,11 @@
 
 [Please check this Readme for information about CTM, including a compatibility list.](https://github.com/CoachsTimeMachine/.github/blob/main/README.md)
 
-[Open the utility here.](https://example.com)
+[Open the utility here.](https://coachstimemachine.github.io/util.photon-patcher/)
 </div>
 
 ---
 
 In-browser Photon PUN and Voice patcher. Designed for old Rec Room builds, but should work with other games that rely on Photon.
+
+This project is licensed under the [MIT License](./LICENSE)
