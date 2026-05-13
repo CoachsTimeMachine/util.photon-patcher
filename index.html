@@ -92,10 +92,10 @@
         <label>Unpatched resources.assets</label>
         <input id="upload" type="file" accept=".assets" name="Upload resources.assets">
         <br>
-        <label>New Photon PUN server</label>
+        <label>New Photon PUN AppID</label>
         <input id="pun" type="text" name="Photon PUN" maxlength="36" size="36">
         <br>
-        <label>New Photon Voice server</label>
+        <label>New Photon Voice AppID</label>
         <input id="voice" type="text" name="Photon Voice" maxlength="36" size="36">
         <br>
         <button id="patchbutton" onclick="orange_wire()">Cut the orange wire (Patch)</button>
@@ -105,14 +105,14 @@
     </div>
     <br>
     <p>You should only need to use this if the game you are patching <b>isn't</b> Rec Room.</p>
-    <button onclick="toggle_rep()">Set original servers</button>
+    <button onclick="toggle_rep()">Set original AppID</button>
     <br>
     <div id = "og" class="content" hidden>
-        <p><b>!! IDs inputted in here will be used over the default ones !!</b><br>Hide this dialog using the button if you don't need it.</p>
-        <label>Original Photon PUN server</label>
+        <p><b>!! AppIDs inputted in here will be used over the default ones !!</b><br>Hide this dialog using the button if you don't need it.</p>
+        <label>Original Photon PUN AppID</label>
         <input id="pun-old" type="text" name="Photon PUN" maxlength="36" size="36" value="9372aa8d-d3f4-44a0-986d-419e145a2b83">
         <br>
-        <label>Original Photon Voice server</label>
+        <label>Original Photon Voice AppID</label>
         <input id="voice-old" type="text" name="Photon Voice" maxlength="36" size="36" value="e93ae440-f238-4b6c-848f-1df89faf14f5">
     </div>
 </body>
