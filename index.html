@@ -29,6 +29,14 @@
 
     <script src="./patcher.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('pun_saved'))
+            {
+                document.getElementById('pun').value = localStorage.getItem('pun_saved');
+                document.getElementById('voice').value = localStorage.getItem('voice_saved');
+            }
+        });
+
         function saveBlob(blob, fileName) 
         {
             const url = URL.createObjectURL(blob);
@@ -67,6 +75,13 @@
                 saveBlob(blob, `custom-photon-${file.name}`);
                 status.innerText = "Patched!"
                 status.style = "color: green;"
+
+                //only save it if patching went ok
+                if (document.getElementById('save-appid').checked)
+                {
+                    localStorage.setItem('pun_saved', document.getElementById('pun').value)
+                    localStorage.setItem('voice_saved', document.getElementById('voice').value)
+                }
             }
             catch(e)
             {
@@ -97,6 +112,9 @@
         <br>
         <label>New Photon Voice AppID</label>
         <input id="voice" type="text" name="Photon Voice" maxlength="36" size="36">
+        <br>
+        <input type="checkbox" id="save-appid" name="Save AppIDs" checked>
+        <label> Use these values on next visit.</label>
         <br>
         <button id="patchbutton" onclick="orange_wire()">Cut the orange wire (Patch)</button>
         <hr>
